@@ -10,6 +10,10 @@ RSpec.describe Source, type: :model do
         it { should validate_uniqueness_of :website }
     end
 
+    describe 'Relations' do
+        it { should have_many :articles }
+    end
+
     describe 'Validity' do
         it 'has attributes' do
             expect(Source.new).to_not be_valid
