@@ -30,6 +30,15 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
+group :test do
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'shoulda'
+
+  # Known issues with Windows
+  gem 'database_cleaner', git: 'https://github.com/DatabaseCleaner/database_cleaner.git'
+end
+
 group :development do
 end
 
