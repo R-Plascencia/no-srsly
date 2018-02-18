@@ -1,3 +1,3 @@
 class SourceSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :website
 end
