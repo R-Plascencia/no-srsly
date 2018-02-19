@@ -1,3 +1,3 @@
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :source_id, :title, :description, :top_img, :link, :pub_date
+  attributes :id, :source_id, :title, :summary, :top_img, :url, :pub_date
 end
