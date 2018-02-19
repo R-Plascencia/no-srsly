@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20180218012354) do
   create_table "articles", force: :cascade do |t|
     t.bigint "source_id"
     t.string "title", null: false
-    t.text "description", default: "Click for details"
+    t.text "summary", default: "Click for details"
     t.string "top_img"
-    t.string "link", null: false
+    t.string "url", null: false
     t.string "keywords", default: ""
     t.datetime "pub_date"
     t.datetime "created_at", null: false
