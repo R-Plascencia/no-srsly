@@ -6,7 +6,7 @@ RSpec.describe Article, type: :model do
 
   describe 'Model Validation' do
     it { should validate_presence_of :title }
-    it { should validate_presence_of :link }
+    it { should validate_presence_of :url }
   end
 
   describe 'Relations' do
@@ -19,7 +19,7 @@ RSpec.describe Article, type: :model do
     end
 
     it 'needs a title' do
-      expect(Article.new(:link => 'www.test.com')).to_not be_valid
+      expect(Article.new(:url => 'www.test.com')).to_not be_valid
     end
 
     it 'needs a link' do
@@ -32,10 +32,10 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'Defaults' do
-    let(:article) { Article.new(:title => 'Test defaults', :link => 'www.default.com') }
+    let(:article) { Article.new(:title => 'Test defaults', :url => 'www.default.com') }
 
-    it 'defaults description' do
-      expect(article.description).to eq 'Click for details'
+    it 'defaults summary' do
+      expect(article.summary).to eq 'Click for details'
     end
 
     it 'defaults keywords to blank' do
