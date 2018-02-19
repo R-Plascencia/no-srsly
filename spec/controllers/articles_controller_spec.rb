@@ -131,7 +131,6 @@ RSpec.describe Api::V1::ArticlesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    before {  }
     it 'destroys the requested article' do
       article = Article.create! valid_attributes
       expect {
