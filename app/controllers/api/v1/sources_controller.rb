@@ -2,30 +2,30 @@ module Api::V1
   class SourcesController < ApplicationController
     before_action :set_source, only: [:show, :update, :destroy]
 
-    # GET /sources
+    # GET /v1/sources
     def index
       @sources = Source.all
 
       render json: @sources
     end
 
-    # GET /sources/1
+    # GET /v1/sources/:id
     def show
       render json: @source
     end
 
-    # POST /sources
+    # POST /v1/sources
     def create
       @source = Source.new(source_params)
 
       if @source.save
-        render json: @source, status: :created, location: @source
+        render json: @source, status: :created#, location: @source
       else
         render json: @source.errors, status: :unprocessable_entity
       end
     end
 
-    # PATCH/PUT /sources/1
+    # PATCH/PUT /v1/sources/:id
     def update
       if @source.update(source_params)
         render json: @source
@@ -34,7 +34,7 @@ module Api::V1
       end
     end
 
-    # DELETE /sources/1
+    # DELETE /v1/sources/:id
     def destroy
       @source.destroy
     end

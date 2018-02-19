@@ -1,31 +1,32 @@
 module Api::V1
   class ArticlesController < ApplicationController
+    before_action :set_source, only: [:index, :show, :update, :destroy]
     before_action :set_article, only: [:show, :update, :destroy]
 
-    # GET /articles
+    # GET /v1/sources/:source_id/articles
     def index
-      @articles = Article.all
+      @articles = @source.articles
 
       render json: @articles
     end
 
-    # GET /articles/1
+    # GET /v1/sources/:source_id/articles/:id
     def show
       render json: @article
     end
 
-    # POST /articles
+    # POST /v1/sources/:source_id/articles
     def create
       @article = Article.new(article_params)
 
       if @article.save
-        render json: @article, status: :created, location: @article
+        render json: @article, status: :created#, location: @article
       else
         render json: @article.errors, status: :unprocessable_entity
       end
     end
 
-    # PATCH/PUT /articles/1
+    # PATCH/PUT /v1/sources/:source_id/articles/:id
     def update
       if @article.update(article_params)
         render json: @article
@@ -34,7 +35,7 @@ module Api::V1
       end
     end
 
-    # DELETE /articles/1
+    # DELETE /v1/sources/:source_id/articles/:id
     def destroy
       @article.destroy
     end
@@ -43,6 +44,10 @@ module Api::V1
       # Use callbacks to share common setup or constraints between actions.
       def set_article
         @article = Article.find(params[:id])
+      end
+
+      def set_source
+        @source = Source.find(params[:source_id])
       end
 
       # Only allow a trusted parameter "white list" through.

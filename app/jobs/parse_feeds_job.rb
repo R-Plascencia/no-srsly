@@ -18,13 +18,13 @@ class ParseFeedsJob < ApplicationJob
           :title => _i.title,
           :url => _i.url,
           :pub_date => _i.published,
-          :summary => _i.summary,
+          :summary => sanitize_html(_i.summary)
         )
         article.top_img = _i.attachments[0].url unless _i.attachments.empty?
         if _i.content.nil?
-          article.keywords = get_keywords(ActionView::Base.full_sanitizer.sanitize(_i.summary))
+          article.keywords = get_keywords(sanitize_html(_i.summary))
         else
-          article.keywords = get_keywords(ActionView::Base.full_sanitizer.sanitize(_i.content))
+          article.keywords = get_keywords(sanitize_html(_i.content))
         end
 
         if not article.save
@@ -61,5 +61,9 @@ class ParseFeedsJob < ApplicationJob
     end
 
     return results.join(',')
+  end
+
+  def sanitize_html(text)
+    return ActionView::Base.full_sanitizer.sanitize(text)
   end
 end
