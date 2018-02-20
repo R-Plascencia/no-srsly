@@ -47,7 +47,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def source_params
-        params.fetch(:source, {})
+        params.permit(:name, :website)
       end
   end
 end

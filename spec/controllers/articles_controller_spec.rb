@@ -113,21 +113,21 @@ RSpec.describe Api::V1::ArticlesController, type: :controller do
       end
     end
 
-    # context 'with invalid params' do
-    #   let(:bad_attributes) do
-    #     {
-    #       :fuckingshit => 'FUUUUU',
-    #       :source_id => source.id,
-    #       :id => article.id
-    #     }
-    #   end
+    context 'with invalid params' do
+      let(:bad_attributes) do
+        {
+          :url => 'FUUUUU',
+          :source_id => source.id,
+          :id => article.id
+        }
+      end
 
-    #   it 'renders a JSON response with errors for the article' do
-    #     patch :update, params: bad_attributes
-    #     expect(response).to have_http_status :unprocessable_entity
-    #     expect(response.content_type).to eq 'application/json'
-    #   end
-    # end
+      it 'renders a JSON response with errors for the article' do
+        patch :update, params: bad_attributes
+        expect(response).to have_http_status :unprocessable_entity
+        expect(response.content_type).to eq 'application/json'
+      end
+    end
   end
 
   describe 'DELETE #destroy' do
