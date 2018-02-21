@@ -40,6 +40,21 @@ module Api::V1
       @article.destroy
     end
 
+    # POST /v1/articles/find/
+    def find
+      results = Array.new
+      params_arr = params[:keywords].split(',').map(&:downcase)
+      
+      Article.all.each do |_article|
+        _kw = _article.keywords.split(',').map(&:downcase)
+        if not (_kw & params_arr).empty?
+          results.push _article
+        end
+      end
+
+      render json: results
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_article

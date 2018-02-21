@@ -9,7 +9,11 @@ Rails.application.routes.draw do
         resources :sources do
           resources :articles
         end
-        resources :articles
+        resources :articles do
+          collection do
+            post :find
+          end
+        end
 
       end
     end
