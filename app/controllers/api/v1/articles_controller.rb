@@ -43,7 +43,7 @@ module Api::V1
     # POST /v1/articles/find/
     def find
       results = Array.new
-      params_arr = params[:keywords].split(',').map(&:downcase)
+      params_arr = params[:keywords].split(/[\s,]/).reject {|n| n == ''}.map(&:downcase)
       
       Article.all.each do |_article|
         _kw = _article.keywords.split(',').map(&:downcase)
