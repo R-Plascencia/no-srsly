@@ -33,5 +33,10 @@ module NoSrsly
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.after_initialize do 
+      ParseFeedsJob.set(wait:10.seconds).perform_later
+      PurgeOldArticlesJob.set(wait:15.seconds).perform_later
+    end
   end
 end

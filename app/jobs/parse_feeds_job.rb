@@ -33,6 +33,8 @@ class ParseFeedsJob < ApplicationJob
         end
       end
     end
+
+    ParseFeedsJob.set(wait:2.days).perform_later
   end
 
   private
