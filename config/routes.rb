@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # On localhost use api.lvh.me:3000
+  # On localhost use lvh.me:3000/api
   # lvh.me is alias for localhost!
   namespace :api do
     namespace :v1 do

@@ -11,7 +11,7 @@ class ParseFeedsJob < ApplicationJob
       feed = FeedParser::Parser.parse(txt)
 
       feed.items.each do |_i|
-        next if _i.published < 2.days.ago
+        next if _i.published < 2.days.ago or Article.exists?(:url => _i.url)
  
         article = Article.new(
           :source_id => Source.search_by_name(_source).first.id,
@@ -28,13 +28,13 @@ class ParseFeedsJob < ApplicationJob
         end
 
         if not article.save
-          puts 'Something happened'
+          puts article.errors.full_messages
           next
         end
       end
     end
 
-    ParseFeedsJob.set(wait:2.days).perform_later
+    ParseFeedsJob.set(wait:6.hours).perform_later
   end
 
   private
